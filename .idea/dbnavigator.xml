@@ -22,6 +22,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
+      <object connection-id="473c4ca7-3d66-4c23-9a86-20ecc1ab85b7" object-ref="schemas/mabaya/tables/product" />
       <object connection-id="473c4ca7-3d66-4c23-9a86-20ecc1ab85b7" object-ref="schemas/mabaya/tables/category" />
     </open-files>
   </component>
@@ -31,8 +32,11 @@
     <filter-actions connection-id="473c4ca7-3d66-4c23-9a86-20ecc1ab85b7" dataset="mabaya.category" active-filter-id="29799f15-5e80-4574-b79c-86b24c3491fc">
       <filter id="29799f15-5e80-4574-b79c-86b24c3491fc" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
-    <filter-actions connection-id="473c4ca7-3d66-4c23-9a86-20ecc1ab85b7" dataset="mabaya.product" active-filter-id="" />
+    <filter-actions connection-id="473c4ca7-3d66-4c23-9a86-20ecc1ab85b7" dataset="mabaya.product" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="473c4ca7-3d66-4c23-9a86-20ecc1ab85b7" dataset="mabaya.campaign" active-filter-id="" />
+  </component>
+  <component name="DBNavigator.Project.ExecutionManager">
+    <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
