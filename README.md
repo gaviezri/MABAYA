@@ -10,7 +10,7 @@ used to create a campaign, body expected to contain json as follows:
 
   [Body]
   
-  {
+    {
   
       Name=name,
 
@@ -20,7 +20,7 @@ used to create a campaign, body expected to contain json as follows:
 
       Bid=(a decimal number representing PPC)
       
-   }
+    }
    
   [Body]
   
