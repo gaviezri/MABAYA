@@ -1,4 +1,5 @@
 to run the server - use the run.bat
+
 to config the database -> inside .\db\config.txt change the fields accordingly.
 
 endpoints:
