@@ -40,15 +40,17 @@ used to create a campaign, body expected to contain json as follows:
 * /entities/products - methods : [POST]
   used to insert new products to the db. body expected to contain json as follows:
   [Body]
-    {
-        Title=title,
+ 
+       {
+          Title=title,
 
-        Category=category,
+          Category=category,
 
-        Price=(a decimal representing price),
+          Price=(a decimal representing price),
       
-        SerialNumber=(integer representing S\N)
-     }
+          SerialNumber=(integer representing S\N)
+        
+        }
   [Body]
     
 <!--     
