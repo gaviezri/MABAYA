@@ -10,7 +10,7 @@ used to create a campaign, body expected to contain key-value pairs as follows:
 
       Name="campaign name"
 
-      StartDate="date to which 10 days from, the campagin will be active"
+      StartDate="date to which 10 days from, the campagin will be active" (if not present, Date.Now() will be used)
 
       Products="comma seperated identifiers (integers) of products in the campaign; the ids shpuld be found in the database"
 
