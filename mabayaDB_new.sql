@@ -42,13 +42,13 @@ DROP TABLE IF EXISTS `campaign_product`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `campaign_product` (
   `Id` int NOT NULL AUTO_INCREMENT,
-  `ProductId` int NOT NULL,
+  `ProductSerialNumber` int NOT NULL,
   `CampaignId` int NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `fk_campaign_product_campaign` (`CampaignId`),
-  KEY `fk_campaign_product_product` (`ProductId`),
+  KEY `fk_campaign_product_product` (`ProductSerialNumber`),
   CONSTRAINT `fk_campaign_product_campaign` FOREIGN KEY (`CampaignId`) REFERENCES `campaign` (`Id`),
-  CONSTRAINT `fk_campaign_product_product` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`)
+  CONSTRAINT `fk_campaign_product_product` FOREIGN KEY (`ProductSerialNumber`) REFERENCES `product` (`SerialNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 --
