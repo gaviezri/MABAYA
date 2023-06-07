@@ -11,6 +11,7 @@ used to create a campaign, body expected to contain json as follows:
   [Body]
   
   {
+  
       Name=name,
 
       StartDate=(date to which 10 days from, the campagin will be active), // (if not present, Date.Now() will be used)
@@ -18,6 +19,7 @@ used to create a campaign, body expected to contain json as follows:
       Products=(list of identifiers (integers) of products in the campaign the ids shpuld be found in the database)
 
       Bid=(a decimal number representing PPC)
+      
    }
    
   [Body]
