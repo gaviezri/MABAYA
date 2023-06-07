@@ -36,6 +36,7 @@ use to create a campaign, body expected to contain json as follows:
   
 * /entities/products - methods : [POST]
   use to insert new products to the db. body expected to contain json as follows:
+  
   [Body]
  
        {
