@@ -5,6 +5,7 @@ to config the database -> inside .\db\config.txt change the fields accordingly.
 endpoints:
 * /campaigns/create - methods : [POST] 
 used to create a campaign, body expected to contain key-value pairs as follows:
+
 [Body]
   
   name="campaign name"
@@ -19,20 +20,27 @@ used to create a campaign, body expected to contain key-value pairs as follows:
   
 * /ads/retrieve - methods : [GET]
  used to retrieve ads 
- <query params>
+ 
+ [query params]
+ 
   specify the request category /ads/retrieve?cat="category"
-  for instance if the category 'tennis' is desired:
-  /ads/retrieve?cat=tennis
-  </query params>
   
+  for instance if the category 'tennis' is desired:
+  
+  /ads/retrieve?cat=tennis
+  
+  [query params]
   
 * /entities/products - methods : [POST]
   used to insert new products to the db. body expected to contain key-value pairs as follows:
-  <Body>
-    title=<title>
-    category=<category>
-    price=<a decimal representing price>
-  </Body>
+  [Body]
+    title="title"
+    
+    category="category"
+    
+    price="a decimal representing price"
+    
+  [Body]
     
 <!--     
  * /entities/campaign - methods : [GET]
