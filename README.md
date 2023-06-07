@@ -12,11 +12,11 @@ use to create a campaign, body expected to contain json as follows:
   [Body]
 
       {  
-        Name=name,
+          Name=name,
 
-        Products=(list of identifiers (integers) of products in the campaign the ids shpuld be found in the database)
+          Products=[1,2,3] (list of identifiers (integers) of products in the campaign the ids shpuld be found in the database)
 
-        Bid=(a decimal number representing PPC) 
+          Bid=(a decimal number representing PPC) 
       }
    
   [Body]
@@ -39,14 +39,13 @@ use to create a campaign, body expected to contain json as follows:
   [Body]
  
        {
-          Title=title,
+            Title=title,
 
-          Category=category,
+            Category=category,
 
-          Price=(a decimal representing price),
-      
-          SerialNumber=(integer representing S\N)
-        
+            Price=(a decimal representing price),
+
+            SerialNumber=(integer representing S\N)
         }
   [Body]
     
