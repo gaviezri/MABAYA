@@ -40,6 +40,8 @@ used to create a campaign, body expected to contain key-value pairs as follows:
       category="category"
 
       price="a decimal representing price"
+      
+      serialNumber="integer representing S\N"
     
   [Body]
     
