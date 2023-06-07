@@ -5,12 +5,17 @@ to config the database -> inside .\db\config.txt change the fields accordingly.
 endpoints:
 * /campaigns/create - methods : [POST] 
 used to create a campaign, body expected to contain key-value pairs as follows:
-<Body>
-  name=<campaign name>
-  startDate=<date to which 10 days from, the campagin will be active>
-  products=<comma seperated identifiers (integers) of products in the campaign; the ids shpuld be found in the database>
-  bid=<a decimal number representing PPC>
-</Body>
+[Body]
+  
+  name="campaign name"
+  
+  startDate="date to which 10 days from, the campagin will be active"
+  
+  products="comma seperated identifiers (integers) of products in the campaign; the ids shpuld be found in the database"
+  
+  bid="a decimal number representing PPC"
+  
+[Body]
   
 * /ads/retrieve - methods : [GET]
  used to retrieve ads 
