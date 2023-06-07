@@ -6,18 +6,18 @@ Note: the values in requests' body does not need to be enclosed with quotation m
 
 endpoints:
 * /campaigns/create - methods : [POST] 
-used to create a campaign, body expected to contain key-value pairs seperated by \n as follows:
+used to create a campaign, body expected to contain json as follows:
 
   [Body]
+  {
+      Name=name,
 
-      Name={campaign name}\n
+      StartDate=(date to which 10 days from, the campagin will be active), // (if not present, Date.Now() will be used)
 
-      StartDate={date to which 10 days from, the campagin will be active}\n // (if not present, Date.Now() will be used)
+      Products=(list of identifiers (integers) of products in the campaign the ids shpuld be found in the database)
 
-      Products={comma seperated identifiers (integers) of products in the campaign; the ids shpuld be found in the database}\n
-
-      Bid={a decimal number representing PPC}
-
+      Bid=(a decimal number representing PPC)
+   }
   [Body]
   
 * /ads/retrieve - methods : [GET]
