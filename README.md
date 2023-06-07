@@ -6,15 +6,14 @@ Note: the values in requests' body does not need to be enclosed with quotation m
 
 endpoints:
 * /campaigns/create - methods : [POST] 
-used to create a campaign, body expected to contain json as follows:
+Note: StartDate Will be created automatically when a new entry is submitted with current date.
+use to create a campaign, body expected to contain json as follows:
 
   [Body]
   
     {
   
       Name=name,
-
-      StartDate=(date to which 10 days from, the campagin will be active), // (if not present, Date.Now() will be used)
 
       Products=(list of identifiers (integers) of products in the campaign the ids shpuld be found in the database)
 
@@ -25,7 +24,7 @@ used to create a campaign, body expected to contain json as follows:
   [Body]
   
 * /ads/retrieve - methods : [GET]
- used to retrieve ads 
+ use to retrieve ads 
  
    [query params]
 
@@ -38,7 +37,7 @@ used to create a campaign, body expected to contain json as follows:
    [query params]
   
 * /entities/products - methods : [POST]
-  used to insert new products to the db. body expected to contain json as follows:
+  use to insert new products to the db. body expected to contain json as follows:
   [Body]
  
        {
