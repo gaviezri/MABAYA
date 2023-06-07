@@ -8,13 +8,13 @@ used to create a campaign, body expected to contain key-value pairs as follows:
 
   [Body]
 
-    name="campaign name"
+      name="campaign name"
 
-    startDate="date to which 10 days from, the campagin will be active"
+      startDate="date to which 10 days from, the campagin will be active"
 
-    products="comma seperated identifiers (integers) of products in the campaign; the ids shpuld be found in the database"
+      products="comma seperated identifiers (integers) of products in the campaign; the ids shpuld be found in the database"
 
-    bid="a decimal number representing PPC"
+      bid="a decimal number representing PPC"
 
   [Body]
   
