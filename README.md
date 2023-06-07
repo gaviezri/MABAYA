@@ -8,13 +8,13 @@ used to create a campaign, body expected to contain key-value pairs as follows:
 
   [Body]
 
-      name="campaign name"
+      Name="campaign name"
 
-      startDate="date to which 10 days from, the campagin will be active"
+      StartDate="date to which 10 days from, the campagin will be active"
 
-      products="comma seperated identifiers (integers) of products in the campaign; the ids shpuld be found in the database"
+      Products="comma seperated identifiers (integers) of products in the campaign; the ids shpuld be found in the database"
 
-      bid="a decimal number representing PPC"
+      Bid="a decimal number representing PPC"
 
   [Body]
   
@@ -35,13 +35,13 @@ used to create a campaign, body expected to contain key-value pairs as follows:
   used to insert new products to the db. body expected to contain key-value pairs as follows:
   [Body]
   
-      title="title"
+      Title="title"
 
-      category="category"
+      Category="category"
 
-      price="a decimal representing price"
+      Price="a decimal representing price"
       
-      serialNumber="integer representing S\N"
+      SerialNumber="integer representing S\N"
     
   [Body]
     
@@ -49,9 +49,9 @@ used to create a campaign, body expected to contain key-value pairs as follows:
  * /entities/campaign - methods : [GET]
   used to retrieve campaign details from the db.
   <Body>
-    title=<title>
-    category=<category>
-    price=<a decimal representing price>
+    Title=<title>
+    Category=<category>
+    Price=<a decimal representing price>
   </Body> -->
     
   
