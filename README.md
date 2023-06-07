@@ -10,14 +10,14 @@ Note: StartDate Will be created automatically when a new entry is submitted with
 use to create a campaign, body expected to contain json as follows:
 
   [Body]
-  
-    {  
-      Name=name,
 
-      Products=(list of identifiers (integers) of products in the campaign the ids shpuld be found in the database)
+      {  
+        Name=name,
 
-      Bid=(a decimal number representing PPC) 
-    }
+        Products=(list of identifiers (integers) of products in the campaign the ids shpuld be found in the database)
+
+        Bid=(a decimal number representing PPC) 
+      }
    
   [Body]
   
