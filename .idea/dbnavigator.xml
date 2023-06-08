@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -21,10 +21,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="473c4ca7-3d66-4c23-9a86-20ecc1ab85b7" object-ref="schemas/mabaya/tables/product" />
-      <object connection-id="473c4ca7-3d66-4c23-9a86-20ecc1ab85b7" object-ref="schemas/mabaya/tables/category" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="473c4ca7-3d66-4c23-9a86-20ecc1ab85b7" dataset="mysql.db" active-filter-id="" />

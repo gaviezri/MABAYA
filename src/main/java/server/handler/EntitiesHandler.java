@@ -47,7 +47,7 @@ public class EntitiesHandler implements HttpHandler {
             response = "Product inserted\n + " + bodyPairs.toString();
             exchange.sendResponseHeaders(200, response.length());
         } else {
-            response = "Product not inserted\n + " + bodyPairs.toString() + "\n. maybe casing error?";
+            response = "Product not inserted\n + " + bodyPairs.toString() + "\n. Serial Number already exists!";
             exchange.sendResponseHeaders(400, response.length());
             exchange.getResponseBody().write(response.getBytes());
         }

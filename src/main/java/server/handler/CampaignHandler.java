@@ -11,19 +11,25 @@ public class CampaignHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         String method = exchange.getRequestMethod();
         if (!method.equals("POST")){
-            System.out.println("Invalid request method");
-            exchange.sendResponseHeaders(405, -1);
+            handleInvalidMethod(exchange);
             return;
         }
         try {
-            String JSONResult = DBManager.insertNewCampaign(exchange.getRequestBody());
-            exchange.sendResponseHeaders(200, JSONResult.length());
-            exchange.getResponseBody().write(JSONResult.getBytes());
+            generateResponse(DBManager.insertNewCampaign(exchange.getRequestBody()), exchange, 200);
 
         } catch (IllegalArgumentException e) {
-            String response = "Invalid request body - most likely illegal product ID in campaign.";
-            exchange.sendResponseHeaders(405, response.length());
-            exchange.getResponseBody().write(response.getBytes());
+            generateResponse("Invalid request body - most likely illegal product ID in campaign.", exchange, 405);
         }
+    }
+
+    private static void generateResponse(String response, HttpExchange exchange, int rCode) throws IOException {
+        exchange.sendResponseHeaders(rCode, response.length());
+        exchange.getResponseBody().write(response.getBytes());
+    }
+
+    private static void handleInvalidMethod(HttpExchange exchange) throws IOException {
+        System.out.println("Invalid request method");
+        exchange.sendResponseHeaders(405, -1);
+        return;
     }
 }
