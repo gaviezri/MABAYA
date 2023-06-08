@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact name="mabaya_home_assignment:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/mabaya_home_assignment_jar</output-path>
+    <root id="root">
+      <element id="archive" name="mabaya_home_assignment.jar">
+        <element id="module-output" name="mabaya_home_assignment" />
+      </element>
+      <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.10.1" />
+      <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.27" />
+      <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+    </root>
+  </artifact>
+</component>

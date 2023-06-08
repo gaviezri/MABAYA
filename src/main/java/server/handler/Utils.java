@@ -42,4 +42,19 @@ public class Utils {
         }
         return body.toString();
     }
+
+    public static Map<String,String> createMapFromQuery(String query) {
+        Map<String,String> result = new HashMap<>();
+        if(query == null || query.isEmpty()){
+            return result;
+        }
+        String[] pairs = query.split("&");
+        for (String pair : pairs) {
+            String[] keyValue = pair.split("=");
+            result.put(keyValue[0], keyValue[1]);
+        }
+        return result;
+    }
 }
+
+

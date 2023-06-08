@@ -2,11 +2,8 @@ package db;
 
 import java.io.InputStream;
 import java.sql.*;
-import java.util.Date;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.sql.Date;
+import java.util.*;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -16,10 +13,14 @@ import static server.handler.Utils.createMapFromBody;
 
 public class DBManager {
     Connection connection;
-    private static class QueryBuilder{
+
+
+
+
+    private static class QueryBuilder {
         private StringBuilder Query;
 
-        public QueryBuilder(){
+        public QueryBuilder() {
             Query = new StringBuilder();
         }
 
@@ -38,7 +39,7 @@ public class DBManager {
                     Query.append("(Name) ");
                     break;
                 case "campaign_product":
-                    Query.append("(ProductId, CampaignId) ");
+                    Query.append("(ProductSerialNumber, CampaignId) ");
                     break;
             }
             return this;
@@ -62,6 +63,73 @@ public class DBManager {
             return this;
         }
 
+        public QueryBuilder select(String... columns){
+            Query.append("SELECT ");
+            int size = columns.length;
+            for (int i = 0; i < size; i++) {
+                Query.append(columns[i])
+                        .append((i!=size-1)?", ":" ");
+            }
+            return this;
+        }
+        public QueryBuilder from(String table){
+            Query.append("FROM ");
+            Query.append(table);
+            Query.append(" ");
+            return this;
+        }
+
+        public QueryBuilder join(String table){
+            Query.append("JOIN ");
+            Query.append(table);
+            Query.append(" ");
+            return this;
+        }
+
+        public QueryBuilder on(String colA, String colB){
+            Query.append("ON ");
+            Query.append(colA);
+            Query.append(" = ");
+            Query.append(colB);
+            Query.append(" ");
+            return this;
+        }
+
+        public QueryBuilder where(String condition){
+            Query.append("WHERE ");
+            Query.append(condition);
+            Query.append(" ");
+            return this;
+        }
+
+        public QueryBuilder and(String condition){
+            Query.append("AND ");
+            Query.append(condition);
+            Query.append(" ");
+            return this;
+        }
+
+        public QueryBuilder orderBy(String columns, boolean ascending){
+            Query.append("ORDER BY ");
+            Query.append(columns);
+            Query.append(" ");
+            Query.append((ascending)?"ASC ":"DESC ");
+            return this;
+        }
+        public QueryBuilder groupBy(String... columns){
+            Query.append("GROUP BY ");
+            int size = columns.length;
+            for (int i = 0; i < size; i++) {
+                Query.append(columns[i])
+                        .append((i!=size-1)?", ":" ");
+            }
+            return this;
+        }
+
+        public QueryBuilder limit(Integer limit){
+            Query.append("limit " +limit.toString() );
+            return this;
+        }
         @Override
         public String toString(){
             String finalizedQuery = Query.toString();
@@ -70,6 +138,21 @@ public class DBManager {
         }
     }
     //Singleton class
+    private static List<String> SQL_KEY_WORDS = new ArrayList<>();
+    static {
+        SQL_KEY_WORDS.add("SELECT");
+        SQL_KEY_WORDS.add("FROM");
+        SQL_KEY_WORDS.add("WHERE");
+        SQL_KEY_WORDS.add("AND");
+        SQL_KEY_WORDS.add("OR");
+        SQL_KEY_WORDS.add("INSERT INTO");
+        SQL_KEY_WORDS.add("VALUES");
+    }
+    public static boolean isSafeParam(String param){
+        // return true if the param is not a SQL key word
+        // a cheap way to prevent SQL injection
+        return !SQL_KEY_WORDS.contains(param);
+    }
     private static String DB_URL;
     private static String USERNAME;
     private static String PASSWORD;
@@ -85,15 +168,51 @@ public class DBManager {
             System.out.println("Error reading config file");
         }
     }
-    public static DBManager getInstance() {
-        return instance;
+
+
+    public static String retrieveAds(Map<String, String> params) {
+        // given a category name, from the campaigns with the highest bid and which StartDate is less than 10 days from now
+        // select one of the products with the highest price
+        // return the product title and price
+        // if no such campaign exists, return an empty list
+        String category = params.get("cat");
+        if (!isSafeParam(category)) {
+            return "No category was given";
+        }
+        String FinalizedQuery = new QueryBuilder()
+                .select("p.*")
+                .from("product p")
+                .join("campaign_product cp").on("p.SerialNumber", "cp.ProductSerialNumber")
+                .join("campaign c").on("cp.campaignId", "c.id")
+                .join("category cat").on("p.categoryId", "cat.id")
+                .where("cat.name = '" + category + "'")
+                .and("c.startdate >= CURDATE() - INTERVAL 10 DAY")
+                .orderBy("c.bid , p.Price", false) // Sort by bid in descending order
+                .limit(1)
+                .toString();
+
+
+
+        System.out.println(FinalizedQuery);
+        try {
+            ResultSet resultSet = queryDataBase(FinalizedQuery);
+            if(resultSet.next()){
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("title", resultSet.getString("Title"));
+                jsonObject.addProperty("price", resultSet.getString("Price"));
+                return jsonObject.toString();
+            }
+        } catch (Exception e) {
+            System.out.println("Error connecting to the database" + e);
+        }
+        return "";
     }
 
     public static String retrieveAllCategories() {
         JsonArray jsonArray = new JsonArray();
         try {
             // create a connection to the database
-            ResultSet resultSet = queryDataBase("SELECT * FROM category");
+            ResultSet resultSet = queryDataBase(new QueryBuilder().select("*").from("category").toString());
 
             // create a JSON object to hold the data
             while (resultSet.next()) {
@@ -110,7 +229,7 @@ public class DBManager {
         JsonArray jsonArray = new JsonArray();
         try {
             // create a connection to the database
-            ResultSet resultSet = queryDataBase("SELECT * FROM product");
+            ResultSet resultSet = queryDataBase(new QueryBuilder().select("*").from("product").toString());
 
             // create a JSON object to hold the data
             while (resultSet.next()) {
@@ -130,9 +249,7 @@ public class DBManager {
 
         Statement statement = getStatementForRead();
         // create the query to send to the database
-        ResultSet resultSet = statement.executeQuery(query);
-        instance.connection.close();
-        return resultSet;
+        return statement.executeQuery(query);
     }
     private static Statement getStatementForRead() throws SQLException {
         instance.connection =  DriverManager.getConnection(DB_URL, USERNAME ,PASSWORD);
@@ -159,7 +276,7 @@ public class DBManager {
         Boolean success = false;
 
         try {
-            Date startDate = new Date();
+            java.util.Date startDate = new java.util.Date();
             java.sql.Date sqlStartDate = new java.sql.Date(startDate.getTime());
 
             Statement statementForWrite = getStatementForWrite();
@@ -183,10 +300,10 @@ public class DBManager {
 
             Collection products = (Collection) campaignValues.get("Products");
 
-            for (Object productId : products) {
+            for (Object productSN : products) {
                 String campaignProductQuery = new QueryBuilder()
                         .insertInto("campaign_product")
-                        .values(productId, campaignId)
+                        .values(productSN, campaignId)
                         .toString();
 
                 success = statementForWrite.executeUpdate(campaignProductQuery) > 0;
@@ -285,8 +402,11 @@ public class DBManager {
         ResultSet resultSet;
         int result = 0;
         resultSet = queryDataBase("SELECT Id FROM category WHERE Name = '" + bodyPairs.get("Category") + "'");
-        try {result = resultSet.getInt("Id");}
-        catch (Exception ignored) {}
+        try {
+            resultSet.next();
+            result = resultSet.getInt("Id");
+        } catch (Exception ignored) {}
+        instance.connection.close();
         return result;
     }
 }

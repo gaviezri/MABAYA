@@ -65,9 +65,9 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `category` (
-  `Id` int NOT NULL AUTO_INCREMENT,
+  `Id` int AUTO_INCREMENT,
   `Name` varchar(200) NOT NULL,
-  PRIMARY KEY (`Id`)
+  PRIMARY KEY (`Id`,`Name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 --
@@ -75,7 +75,7 @@ CREATE TABLE `category` (
 --
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Food'),(2,'Cloth'),(3,'Car'),(4,'Food');
+INSERT INTO `category` VALUES (1,'Food'),(2,'Cloth'),(3,'Cars');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 --
@@ -85,12 +85,11 @@ DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
-  `Id` int NOT NULL AUTO_INCREMENT,
   `Title` varchar(200) NOT NULL,
   `Price` decimal(10,0) NOT NULL,
   `CategoryId` int NOT NULL,
   `serialNumber` int NOT NULL,
-  PRIMARY KEY (`Id`)
+  PRIMARY KEY (`serialNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 --

@@ -1,6 +1,12 @@
+make sure to use java17
+
 to run the server - use the run.bat
 
+
 to config the database -> inside 'config.prop' change the fields accordingly.
+or alternatively, use the sqldump provided.
+
+
 
 in order to optimize the query (bonus) i thought about creating another table to link campaign and category, but due to 
 other priorities i didnt get to that.
