@@ -179,16 +179,17 @@ public class DBManager {
         if (!isSafeParam(category)) {
             return "No category was given";
         }
-
-        String subQuery = new QueryBuilder().select("Id")
-                .from("campaign")
-                .where("StartDate <= CURDATE() - INTERVAL 10 DAY").orderBy("Bid", false).limit(1).toString();
-
-        String FinalizedQuery = new QueryBuilder().select("c.Name", "c.Bid", "p.Title", "p.Price")
+        String FinalizedQuery = new QueryBuilder()
+                .select("p.*")
                 .from("product p")
                 .join("campaign_product cp").on("p.SerialNumber", "cp.ProductSerialNumber")
-                .join("campaign c").on("c.Id", "cp.CampaignId")
-                .join( "("  + subQuery + ") subQuery").on("c.Id", "subQuery.Id").toString();
+                .join("campaign c").on("cp.campaignId", "c.id")
+                .join("category cat").on("p.categoryId", "cat.id")
+                .where("cat.name = '" + category + "'")
+                .and("c.startdate >= CURDATE() - INTERVAL 10 DAY")
+                .orderBy("c.bid , p.Price", false) // Sort by bid in descending order
+                .limit(1)
+                .toString();
 
 
 

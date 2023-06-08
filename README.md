@@ -1,6 +1,9 @@
+make sure to use java17
+
 to run the server - use the run.bat
 
-to config the database -> inside .\db\config.txt change the fields accordingly.
+to config the database -> inside .\db\config.txt change the fields accordingly,
+or alternatively, use the sqldump provided.
 
 Note: the values in requests' body does not need to be enclosed with quotation marks.
 

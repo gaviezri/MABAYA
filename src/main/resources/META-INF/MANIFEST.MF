@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: main.Main
+Class-Path: gson-2.10.1.jar mysql-connector-java-8.0.27.jar protobuf-jav
+ a-3.11.4.jar
+
